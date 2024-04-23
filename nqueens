@@ -1,0 +1,58 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool ok(int q[], int c) {
+    for (int i = 0; i < c; i++)
+        if (q[i] == q[c] || (c-i) == abs(q[c]-q[i])) //3 tests in one line
+            return false; 
+
+    return true; 
+}
+   
+
+
+int nqueens(int n) {
+    int* board = new int[n];
+     board[0]={0}; 
+     int col = 0, sol = 0;
+     
+    //put the queen in the upper left square
+    //board[0] = 0; //b[0][0] = 1 in 2D version
+
+    while( col >= 0){// if we backtrack beyond the first col, we are done
+
+        // if we have moved beyond the last column
+        if(col > n-1){
+            sol++;// print the board
+            col--;// backtrack
+            board[col]++;
+        }
+
+        // If we have moved beyond the last row 
+        if(board[col] > n-1){
+            board[col] = 0;// reset queen
+            col--;// backtrack
+            if (col != -1) board[col]++;
+        }
+
+        // Check if the placed queen is ok.
+        else if( ok(board, col) ){
+            col++;// move to next column if ok
+        } 
+        else{
+            board[col]++;// move to next row if not ok
+        }
+    }
+    delete [] board;
+    return sol;
+
+
+}
+
+int main() {
+   int n = 8;
+   for (int i = 1; i <= n; ++i)
+      cout << "There are " << nqueens(i) << " solutions to the " << i << " queens problem.\n";
+   return 0;
+}
