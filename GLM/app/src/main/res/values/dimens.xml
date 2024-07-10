@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Define the height of the dropdown list for the AutoCompleteTextView -->
+    <dimen name="dropdown_height">120dp</dimen>
+</resources>
